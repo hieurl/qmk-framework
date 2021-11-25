@@ -17,7 +17,21 @@ enum custom_keycodes {
   ON_CONFIG,
 
   RGBETOG,
-  RGBEMOD
+  RGBEMOD,
+
+  VI_SAVE,
+  VI_QUIT,
+  VI_PREV,
+  VI_HOME,
+  VI_END,
+
+  TM_NVER,
+  TM_NHOR,
+  TM_LEFT,
+  TM_RIGHT,
+  TM_SELECT,
+  TM_HOME,
+  TM_END
 };
 
 #define MO_LOWR MO(_LOWER)

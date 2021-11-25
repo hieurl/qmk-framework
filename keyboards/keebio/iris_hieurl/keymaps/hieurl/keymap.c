@@ -4,10 +4,6 @@
 #  include "rgb_underglow.h"
 #endif
 
-#ifdef TAP_DANCE_ENABLE
-#  include "tap_dances.h"
-#endif
-
 extern keymap_config_t keymap_config;
 
 #define TD_SHF TD(T_SHFCAP)
@@ -33,11 +29,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //┌───────┬───────┬───────┬───────┬───────┬───────┐                      ┌───────┬───────┬───────┬───────┬───────┬───────┐
       KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6 ,                        KC_F7,  KC_F8,  KC_F9,  KC_F10, KC_F11, KC_F12,
    //├───────┼───────┼───────┼───────┼───────┼───────┤                      ├───────┼───────┼───────┼───────┼───────┼───────┤
-      KC_GRV, KC_5,   KC_6,   KC_7,   KC_8,   KC_9,                          KC_CIRC, KC_DLR, KC_HOME,KC_END, KC_PGUP,KC_PGDN, 
+      KC_GRV, KC_5,   KC_6,   KC_7,   KC_8,   KC_9,                          TM_HOME,TM_END, KC_HOME,KC_END, KC_PGUP,KC_PGDN, 
    //├───────┼───────┼───────┼───────┼───────┼───────┤                      ├───────┼───────┼───────┼───────┼───────┼───────┤
       KC_LSFT, KC_1,   KC_2,   KC_3,   KC_4,   KC_0,                          KC_LEFT,KC_DOWN, KC_UP, KC_RIGHT,KC_PLUS,KC_MINS,
    //├───────┼───────┼───────┼───────┼───────┼───────┼───────┐      ┌───────┼───────┼───────┼───────┼───────┼───────┼───────┤ 
-      KC_LCTL,KC_PERC,KC_PSCR,KC_LBRC,KC_MINS,KC_PIPE, KC_LGUI,      KC_DEL,KC_LEFT, KC_RIGHT,KC_EXLM,KC_EQL,KC_QUES,KC_DQT, 
+      KC_LCTL,KC_PERC,KC_PSCR,TM_SELECT,TM_NHOR,TM_NVER, KC_LGUI,      KC_DEL,TM_LEFT, TM_RIGHT,KC_EXLM,KC_EQL,KC_QUES,KC_DQT, 
    //└───────┴───────┴───────┴───┬───┴───┬───┴───┬───┴───┬───┘      └───┬───┴───┬───┴───┬───┴───┬───┼───────┼───────┼───────┤
                                   KC_ESC,TT_LOWR, KC_SPC,               KC_SPC, TT_RAIS,KC_RALT
     //                           └───────┴───────┴───────┘              └───────┴───────┴───────┘ 
@@ -45,40 +41,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_RAISE] = LAYOUT(
    //┌────────┬───────┬───────┬───────┬───────┬───────┐                      ┌───────┬───────┬───────┬───────┬───────┬───────┐
-      KC_ESC, KC_1,    KC_2,  KC_3,    KC_4,  KC_5 ,                          KC_6,  KC_7,    KC_8,  KC_9,   KC_0,    KC_PIPE,
+      KC_ESC,   KC_1,    KC_2,  KC_3,    KC_4,  KC_5 ,                          KC_6,  KC_7,    KC_8,  KC_9,   KC_0,    KC_PIPE,
    //├────────┼───────┼───────┼───────┼───────┼───────┤                      ├───────┼───────┼───────┼───────┼───────┼───────┤
-       KC_GRV, KC_EXLM,KC_AT,  KC_LCBR,KC_RCBR,KC_QUOT,                       KC_CIRC,KC_DLR ,KC_LBRC,KC_RBRC,KC_PGUP,KC_PGDN, 
+       KC_GRV, VI_QUIT,VI_SAVE,KC_LCBR,KC_RCBR,KC_QUOT,                       KC_CIRC,KC_DLR ,KC_LBRC,KC_RBRC,KC_PGUP,KC_PGDN, 
    //├────────┼───────┼───────┼───────┼───────┼───────┤                      ├───────┼───────┼───────┼───────┼───────┼───────┤
       KC_LSFT, KC_HASH,KC_DLR, KC_LPRN,KC_RPRN, KC_DQT,                       KC_AMPR,KC_LPRN,KC_RPRN,KC_COLN,KC_EQL, KC_BSPC, 
    //├────────┼───────┼───────┼───────┼───────┼───────┼───────┐      ┌───────┼───────┼───────┼───────┼───────┼───────┼───────┤ 
-      KC_LCTL, KC_PERC,KC_CIRC,KC_LBRC,KC_RBRC,KC_TILD,KC_LGUI,        KC_DEL,KC_UNDS,KC_EXLM, KC_COMM,KC_DOT, KC_SLSH,KC_ESC, 
+      KC_LCTL, KC_PERC,KC_CIRC,KC_LBRC,KC_RBRC,VI_PREV,KC_LGUI,        KC_DEL,KC_LEFT,KC_RIGHT,VI_HOME,VI_END, KC_SLSH,KC_ESC, 
    //└────────┴───────┴───────┴───┬───┴───┬───┴───┬───┴───┬───┘      └───┬───┴───┬───┴───┬───┴───┬───┼───────┼───────┼───────┤
                                    KC_ESC,TT_LOWR, KC_SPC,               KC_ENT, TT_RAIS ,KC_RALT
     //                            └───────┴───────┴───────┘              └───────┴───────┴───────┘ 
-  ),
-//   ┌─────┬─────┬─────┬─────┬─────┬─────┐                  ┌─────┬─────┬─────┬─────┬─────┬─────┐
-//    ESC    1      2     3     4     5                        6     7     8     9     0     - 
-//   ├─────┼─────┼─────┼─────┼─────┼─────┤                  ├─────┼─────┼─────┼─────┼─────┼─────┤
-//      *     `     <     `     >     !                        @     [     -     ]     -     ⌦ 
-//   ├─────┼─────┼─────┼─────┼─────┼─────┤                  ├─────┼─────┼─────┼─────┼─────┼─────┤
-//      ^     \     {     =     }     #                        _     (     "     )           ⌫ 
-//   ├─────┼─────┼─────┼─────┼─────┼─────┼─────┐      ┌─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-//      ⇧     %     :     *     +     ~  TG_LOWR        DEL    $     &     ,     ?     /     ⇧ 
-//   └─────┴─────┴─────┴──┬──┴──┬──┴──┬──┴──┬──┘      └──┬──┴──┬──┴──┬──┴──┬──┴─────┴─────┴─────┘
-//                         LGUI  LOWER  ENT                 SPC RAISE RALT
-//                        └─────┴─────┴─────┘            └─────┴─────┴─────┘ 
-   [_FUNCT] = LAYOUT(
-   //┌────────┬───────┬───────┬───────┬───────┬───────┐                      ┌───────┬───────┬───────┬───────┬───────┬───────┐
-      KC_F1,   KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6 ,                        KC_F7,  KC_F8,  KC_F9,  KC_F10, KC_F11, KC_F12,
-   //├────────┼───────┼───────┼───────┼───────┼───────┤                      ├───────┼───────┼───────┼───────┼───────┼───────┤
-      KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6,                         KC_F7,  KC_F8,  KC_F9,  KC_F10, KC_F11, KC_F12, 
-   //├───────┼───────┼───────┼───────┼───────┼───────┤                      ├───────┼───────┼───────┼───────┼───────┼───────┤
-      RGBEMOD,_______,_______,_______,_______,_______,                       KC_LEFT,KC_DOWN, KC_UP, KC_RGHT,_______,_______,    
-   //├───────┼───────┼───────┼───────┼───────┼───────┼───────┐      ┌───────┼───────┼───────┼───────┼───────┼───────┼───────┤ 
-      RGBETOG,_______,_______,_______,_______,_______,TG_LOWR,       TG_RAIS,_______,_______,_______,_______,_______, RESET, 
-   //└───────┴───────┴───────┴───┬───┴───┬───┴───┬───┴───┬───┘      └───┬───┴───┬───┴───┬───┴───┬───┼───────┼───────┼───────┤
-                                  KC_LGUI,TT_LOWR, KC_SPC,               KC_ENT, TT_RAIS ,TD_CTRL
-    //                           └───────┴───────┴───────┘              └───────┴───────┴───────┘
   )
 };
 
@@ -87,8 +59,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case ON_QWERTY:
       if (record->event.pressed) {
-//        layer_off(_CONFIG);
-        layer_off(_FUNCT);
         layer_off(_LOWER);
         layer_off(_RAISE);
         layer_on(_QWERTY);
@@ -97,8 +67,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     
     case ON_LOWER:
       if (record->event.pressed) {
-//        layer_off(_CONFIG);
-        layer_off(_FUNCT);
         layer_off(_RAISE);
         layer_off(_QWERTY);
         layer_on(_LOWER);
@@ -107,23 +75,73 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     
     case ON_RAISE:
       if (record->event.pressed) {
-//        layer_off(_CONFIG);
-        layer_off(_FUNCT);
         layer_off(_LOWER);
         layer_off(_QWERTY);
         layer_on(_RAISE);
       }
       return false;
-
-    case ON_FUNCT:
+    
+    case VI_SAVE:
       if (record->event.pressed) {
-//        layer_off(_CONFIG);
-        layer_off(_RAISE);
-        layer_off(_LOWER);
-        layer_off(_QWERTY);
-        layer_on(_FUNCT);
+          SEND_STRING(SS_TAP(X_ESC)":w"SS_TAP(X_ENT));
       }
-      return false;
+      break;
+    case VI_QUIT:
+      if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_ESC)":q"SS_TAP(X_ENT));
+      }
+      break;
+    case VI_PREV:
+      if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_ESC)":b#"SS_TAP(X_ENT));
+      }
+      break;
+    case VI_HOME:
+      if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_ESC)"^i");
+      }
+      break;
+    case VI_END:
+      if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_ESC)"$i"SS_TAP(X_RIGHT));
+      }
+      break;
+
+    case TM_NVER:
+      if (record->event.pressed) {
+          SEND_STRING("`|");
+      }
+      break;
+    case TM_NHOR:
+      if (record->event.pressed) {
+          SEND_STRING("`-");
+      }
+      break;
+    case TM_SELECT:
+      if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_ESC)"`[k");
+      }
+      break;
+    case TM_LEFT:
+      if (record->event.pressed) {
+          SEND_STRING("`"SS_TAP(X_LEFT));
+      }
+      break;
+    case TM_RIGHT:
+      if (record->event.pressed) {
+          SEND_STRING("`"SS_TAP(X_RIGHT));
+      }
+      break;
+    case TM_HOME:
+      if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_ESC)"^i");
+      }
+      break;
+    case TM_END:
+      if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_ESC)"$i"SS_TAP(X_RIGHT));
+      }
+      break;
   }
 
   #ifdef RGBLIGHT_ENABLE
