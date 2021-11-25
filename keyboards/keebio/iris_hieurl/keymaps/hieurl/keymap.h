@@ -18,6 +18,11 @@ enum custom_keycodes {
 
   RGBETOG,
   RGBEMOD,
+  
+  GIT_STS,
+  GIT_DIF,
+  GIT_CM,
+  GIT_ADD,
 
   VI_SAVE,
   VI_QUIT,

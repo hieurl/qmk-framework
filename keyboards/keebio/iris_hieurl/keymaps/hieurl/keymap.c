@@ -45,9 +45,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //├────────┼───────┼───────┼───────┼───────┼───────┤                      ├───────┼───────┼───────┼───────┼───────┼───────┤
        KC_GRV, VI_QUIT,VI_SAVE,KC_LCBR,KC_RCBR,KC_QUOT,                       KC_CIRC,KC_DLR ,KC_LBRC,KC_RBRC,KC_PGUP,KC_PGDN, 
    //├────────┼───────┼───────┼───────┼───────┼───────┤                      ├───────┼───────┼───────┼───────┼───────┼───────┤
-      KC_LSFT, KC_HASH,KC_DLR, KC_LPRN,KC_RPRN, KC_DQT,                       KC_AMPR,KC_LPRN,KC_RPRN,KC_COLN,KC_EQL, KC_BSPC, 
+      KC_LSFT, GIT_ADD,GIT_STS, KC_LPRN,KC_RPRN, KC_DQT,                       KC_AMPR,KC_LPRN,KC_RPRN,KC_COLN,KC_EQL, KC_BSPC, 
    //├────────┼───────┼───────┼───────┼───────┼───────┼───────┐      ┌───────┼───────┼───────┼───────┼───────┼───────┼───────┤ 
-      KC_LCTL, KC_PERC,KC_CIRC,KC_LBRC,KC_RBRC,VI_PREV,KC_LGUI,        KC_DEL,KC_LEFT,KC_RIGHT,VI_HOME,VI_END, KC_SLSH,KC_ESC, 
+      KC_LCTL, GIT_CM ,GIT_DIF,KC_LBRC,KC_RBRC,VI_PREV,KC_LGUI,        KC_DEL,KC_LEFT,KC_RIGHT,VI_HOME,VI_END, KC_SLSH,KC_ESC, 
    //└────────┴───────┴───────┴───┬───┴───┬───┴───┬───┴───┬───┘      └───┬───┴───┬───┴───┬───┴───┬───┼───────┼───────┼───────┤
                                    KC_ESC,TT_LOWR, KC_SPC,               KC_ENT, TT_RAIS ,KC_RALT
     //                            └───────┴───────┴───────┘              └───────┴───────┴───────┘ 
@@ -140,6 +140,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case TM_END:
       if (record->event.pressed) {
           SEND_STRING(SS_TAP(X_ESC)"$i"SS_TAP(X_RIGHT));
+      }
+      break;
+
+    case GIT_STS:
+      if (record->event.pressed) {
+          SEND_STRING("git status ."SS_TAP(X_ENT));
+      }
+      break;
+    case GIT_DIF:
+      if (record->event.pressed) {
+          SEND_STRING("git diff HEAD ."SS_TAP(X_ENT));
+      }
+      break;
+    case GIT_CM:
+      if (record->event.pressed) {
+          SEND_STRING("git commit"SS_TAP(X_ENT)"i");
+      }
+      break;
+    case GIT_ADD:
+      if (record->event.pressed) {
+          SEND_STRING("git add ."SS_TAP(X_ENT));
       }
       break;
   }
