@@ -45,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //├────────┼───────┼───────┼───────┼───────┼───────┤                      ├───────┼───────┼───────┼───────┼───────┼───────┤
        KC_GRV, VI_QUIT,VI_SAVE,KC_LCBR,KC_RCBR,KC_QUOT,                       KC_CIRC,KC_DLR ,KC_LBRC,KC_RBRC,KC_PGUP,KC_PGDN, 
    //├────────┼───────┼───────┼───────┼───────┼───────┤                      ├───────┼───────┼───────┼───────┼───────┼───────┤
-      KC_LSFT, GIT_ADD,GIT_STS, KC_LPRN,KC_RPRN, KC_DQT,                       KC_AMPR,KC_LPRN,KC_RPRN,KC_COLN,KC_EQL, KC_BSPC, 
+      KC_LSFT, GIT_ADD,GIT_STS, KC_LPRN,KC_RPRN, KC_DQT,                     GIT_PUSH,KC_LPRN,KC_RPRN,KC_COLN,KC_EQL, KC_BSPC, 
    //├────────┼───────┼───────┼───────┼───────┼───────┼───────┐      ┌───────┼───────┼───────┼───────┼───────┼───────┼───────┤ 
       KC_LCTL, GIT_CM ,GIT_DIF,KC_LBRC,KC_RBRC,VI_PREV,KC_LGUI,        KC_DEL,KC_LEFT,KC_RIGHT,VI_HOME,VI_END, KC_SLSH,KC_ESC, 
    //└────────┴───────┴───────┴───┬───┴───┬───┴───┬───┴───┬───┘      └───┬───┴───┬───┴───┬───┴───┬───┼───────┼───────┼───────┤
@@ -161,6 +161,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case GIT_ADD:
       if (record->event.pressed) {
           SEND_STRING("git add ."SS_TAP(X_ENT));
+      }
+      break;
+    case GIT_PUSH:
+      if (record->event.pressed) {
+          SEND_STRING("git push origin ");
       }
       break;
   }

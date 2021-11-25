@@ -23,6 +23,7 @@ enum custom_keycodes {
   GIT_DIF,
   GIT_CM,
   GIT_ADD,
+  GIT_PUSH,
 
   VI_SAVE,
   VI_QUIT,
