@@ -4,11 +4,18 @@
 #  include "rgb_underglow.h"
 #endif
 
+#ifdef TAP_DANCE_ENABLE
+#  include "tap_dances.h"
+#endif
+#define MOUSEKEY_INTERVAL 20
+#define MOUSEKEY_DELAY 0
+#define MOUSEKEY_TIME_TO_MAX 60
+#define MOUSEKEY_MAX_SPEED 10
+#define MOUSEKEY_WHEEL_DELAY 0
+
 extern keymap_config_t keymap_config;
 
-#define TD_SHF TD(T_SHFCAP)
-#define TD_SEMI TD(T_SEMCOL)
-
+// #define LOW_SLS LT(_LOWER, KC_SLSH)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT(
@@ -35,7 +42,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //├───────┼───────┼───────┼───────┼───────┼───────┼───────┐      ┌───────┼───────┼───────┼───────┼───────┼───────┼───────┤ 
       KC_LCTL,KC_PERC,KC_PSCR,TM_SELECT,TM_NVER,TM_NHOR, KC_LGUI,      KC_DEL,TM_LEFT, TM_RIGHT,KC_EXLM,KC_EQL,KC_QUES,KC_DQT, 
    //└───────┴───────┴───────┴───┬───┴───┬───┴───┬───┴───┬───┘      └───┬───┴───┬───┴───┬───┴───┬───┼───────┼───────┼───────┤
-                                  KC_ESC,TT_LOWR, KC_SPC,               KC_SPC, TT_RAIS,KC_RALT
+                                  KC_ESC,TT_LOWR, KC_SPC,               KC_SPC, KC_LGUI,KC_RALT
     //                           └───────┴───────┴───────┘              └───────┴───────┴───────┘ 
   ),
 
@@ -49,9 +56,46 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //├────────┼───────┼───────┼───────┼───────┼───────┼───────┐      ┌───────┼───────┼───────┼───────┼───────┼───────┼───────┤ 
       KC_LCTL, GIT_CM ,GIT_DIF,KC_LBRC,KC_RBRC,VI_PREV,KC_LGUI,        KC_DEL,KC_LEFT,KC_RIGHT,VI_HOME,VI_END, KC_SLSH,RESET, 
    //└────────┴───────┴───────┴───┬───┴───┬───┴───┬───┴───┬───┘      └───┬───┴───┬───┴───┬───┴───┬───┼───────┼───────┼───────┤
-                                   KC_ESC,TT_LOWR, KC_SPC,               KC_ENT, TT_RAIS ,KC_RALT
+                                   KC_ESC,KC_LGUI, KC_SPC,               KC_ENT, TT_RAIS ,KC_RALT
     //                            └───────┴───────┴───────┘              └───────┴───────┴───────┘ 
-  )
+  ),
+
+  [_FUNCT] = LAYOUT(
+   //┌────────┬───────┬───────┬───────┬───────┬───────┐                      ┌───────┬───────┬───────┬───────┬───────┬───────┐
+      KC_F1,   KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6 ,                        KC_F7,  KC_F8,  KC_F9,  KC_F10, KC_F11, KC_F12,
+   //┌───────┬───────┬───────┬───────┬───────┬───────┐                      ┌───────┬───────┬───────┬───────┬───────┬───────┐
+      KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6,                         KC_F7,  KC_F8,  KC_F9,  KC_F10, KC_F11, KC_F12, 
+   //├───────┼───────┼───────┼───────┼───────┼───────┤                      ├───────┼───────┼───────┼───────┼───────┼───────┤
+      RGBEMOD,RGB_MOD,_______,RGB_VAD, RGB_VAI,_______,                       KC_LEFT,KC_DOWN, KC_UP, KC_RGHT,_______,_______,    
+   //├───────┼───────┼───────┼───────┼───────┼───────┼───────┐      ┌───────┼───────┼───────┼───────┼───────┼───────┼───────┤ 
+      RGBETOG, RGB_HUD, RGB_HUI, RGB_SAD, RGB_SAI,_______,TG_LOWR,       TG_RAIS,_______,_______,_______,_______,_______, RESET, 
+   //└───────┴───────┴───────┴───┬───┴───┬───┴───┬───┴───┬───┘      └───┬───┴───┬───┴───┬───┴───┬───┼───────┼───────┼───────┤
+                                  KC_LGUI,TT_LOWR, KC_SPC,               KC_ENT, TT_RAIS ,KC_RCTRL
+    //                           └───────┴───────┴───────┘              └───────┴───────┴───────┘ 
+  ),
+
+//   ┌─────┬─────┬─────┬─────┬─────┬─────┐                  ┌─────┬─────┬─────┬─────┬─────┬─────┐
+//   TAB     Q     W     E     R     T                        Y     U     I     O     P       
+//   ├─────┼─────┼─────┼─────┼─────┼─────┤                  ├─────┼─────┼─────┼─────┼─────┼─────┤ 
+//    ⎋ ^     A     S     D     F     G                        H     J     K     L   SCLN   QUOT 
+//   ├─────┼─────┼─────┼─────┼─────┼─────┼─────┐      ┌─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+//      ⇧     Z     X     C     V     B    LOW          RAIS   N     M     ,     .     /     ⇧ 
+//   └─────┴─────┴─────┴──┬──┴──┬──┴──┬──┴──┬──┘      └──┬──┴──┬──┴──┬──┴──┬──┴─────┴─────┴─────┘
+//                         LGUI  LOWER  ENT                SPC  RAISE  RALT
+//                        └─────┴─────┴─────┘            └─────┴─────┴─────┘ 
+  [_CONFIG] = LAYOUT(
+   //┌────────┬───────┬───────┬───────┬───────┬───────┐                      ┌───────┬───────┬───────┬───────┬───────┬───────┐
+      KC_F1,   KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6 ,                        KC_F7,  KC_F8,  KC_F9,  KC_F10, KC_F11, KC_F12,
+   //┌───────┬───────┬───────┬───────┬───────┬───────┐                      ┌───────┬───────┬───────┬───────┬───────┬───────┐
+      KC_TAB, KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                          KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,   KC_BSLS, 
+   //├───────┼───────┼───────┼───────┼───────┼───────┤                      ├───────┼───────┼───────┼───────┼───────┼───────┤
+      KC_LCTL, KC_A,  KC_S,   KC_D,   KC_F,   KC_G,                          KC_H,   KC_J,   KC_K,   KC_L,   KC_SCLN, KC_BSPC,
+   //├───────┼───────┼───────┼───────┼───────┼───────┼───────┐      ┌───────┼───────┼───────┼───────┼───────┼───────┼───────┤ 
+      KC_LCTL, KC_Z,   KC_X,    KC_C,   KC_V,   KC_B, TG_LOWR,       TG_RAIS, KC_N,  KC_M,   KC_COMM,KC_DOT, KC_SLSH, RESET, 
+   //└───────┴───────┴───────┴───┬───┴───┬───┴───┬───┴───┬───┘      └───┬───┴───┬───┴───┬───┴───┬───┼───────┼───────┼───────┤
+                                  KC_LGUI,TT_LOWR, KC_SPC,               KC_ENT, TT_RAIS ,KC_RCTRL
+    //                           └───────┴───────┴───────┘              └───────┴───────┴───────┘ 
+  ),
 };
 
 
@@ -59,6 +103,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case ON_QWERTY:
       if (record->event.pressed) {
+        layer_off(_CONFIG);
+        layer_off(_FUNCT);
         layer_off(_LOWER);
         layer_off(_RAISE);
         layer_on(_QWERTY);
@@ -67,6 +113,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     
     case ON_LOWER:
       if (record->event.pressed) {
+        layer_off(_CONFIG);
+        layer_off(_FUNCT);
         layer_off(_RAISE);
         layer_off(_QWERTY);
         layer_on(_LOWER);
@@ -75,12 +123,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     
     case ON_RAISE:
       if (record->event.pressed) {
+        layer_off(_CONFIG);
+        layer_off(_FUNCT);
         layer_off(_LOWER);
         layer_off(_QWERTY);
         layer_on(_RAISE);
       }
       return false;
-    
+
+    case ON_FUNCT:
+      if (record->event.pressed) {
+        layer_off(_CONFIG);
+        layer_off(_RAISE);
+        layer_off(_LOWER);
+        layer_off(_QWERTY);
+        layer_on(_FUNCT);
+      }
+      return false;
+      
     case VI_SAVE:
       if (record->event.pressed) {
           SEND_STRING(SS_TAP(X_ESC)":w"SS_TAP(X_ENT));
@@ -179,8 +239,42 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
+
+void encoder_update_user(uint8_t index, bool clockwise) {
+   if (layer_state_is(_CONFIG)){
+        if (index == 0) {
+            if (clockwise) {
+                tap_code(KC_MS_D);
+            } else {
+                tap_code(KC_MS_U);
+            }
+        } else if (index == 1) {
+            if (clockwise) {
+                tap_code(KC_MS_R);
+            } else {
+                tap_code(KC_MS_L);
+            }
+        }
+   }else{
+      if (index == 0) {
+          if (clockwise) {
+              tap_code(KC_VOLD);
+          } else {
+              tap_code(KC_VOLU);
+          }
+        } else if (index == 1) {
+          if (clockwise) {
+              tap_code(KC_PGDN);
+          } else {
+              tap_code(KC_PGUP);
+          }
+      }
+   }
+}
+
+
 layer_state_t layer_state_set_user(layer_state_t state) {
-  state = update_tri_layer_state(state, _LOWER, _RAISE, _FUNCT);
+
   #ifdef RGBLIGHT_ENABLE
     handle_layer_changes(state);
   #endif
