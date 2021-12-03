@@ -16,7 +16,6 @@
 extern keymap_config_t keymap_config;
 
 // #define LOW_SLS LT(_LOWER, KC_SLSH)
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT(
    //┌────────┬───────┬───────┬───────┬───────┬───────┐                      ┌───────┬───────┬───────┬───────┬───────┬───────┐
@@ -26,23 +25,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //├────────┼───────┼───────┼───────┼───────┼───────┤                      ├───────┼───────┼───────┼───────┼───────┼───────┤
       KC_LSFT,   KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                          KC_H,   KC_J,   KC_K,   KC_L,  KC_SCLN,KC_BSLS,
    //├────────┼───────┼───────┼───────┼───────┼───────┼───────┐      ┌───────┼───────┼───────┼───────┼───────┼───────┼───────┤ 
-      KC_LCTL,  KC_Z,    KC_X,  KC_C,   KC_V,   KC_B,  KC_LGUI,       KC_DEL, KC_N,  KC_M, KC_COMM,KC_DOT, KC_SLSH, KC_QUOT, 
+      KC_LCTL,  KC_Z,    KC_X,  KC_C,   KC_V,   KC_B,  KC_LGUI,       KC_DEL, KC_N,  KC_M, KC_COMM,KC_DOT, KC_SLSH,   KC_TILD, 
    //└────────┴───────┴───────┴───┬───┴───┬───┴───┬───┴───┬───┘      └───┬───┴───┬───┴───┬───┴───┬───┼───────┼───────┼───────┤
                                    KC_ESC ,TT_LOWR, KC_SPC,               KC_ENT, TT_RAIS,KC_RALT
     //                            └───────┴───────┴───────┘              └───────┴───────┴───────┘ 
+    //
   ),
 
   [_LOWER] = LAYOUT(
    //┌───────┬───────┬───────┬───────┬───────┬───────┐                      ┌───────┬───────┬───────┬───────┬───────┬───────┐
       KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6 ,                        KC_F7,  KC_F8,  KC_F9,  KC_F10, KC_F11, KC_F12,
    //├───────┼───────┼───────┼───────┼───────┼───────┤                      ├───────┼───────┼───────┼───────┼───────┼───────┤
-      KC_GRV, KC_5,   KC_6,   KC_7,   KC_8,   KC_9,                          TM_HOME,TM_END, KC_HOME,KC_END, KC_PGUP,KC_PGDN, 
+      KC_GRV, TM_NVER,TM_NHOR, KC_E,  TM_HOME,TM_END,                        KC_1,   KC_2,   KC_3,   KC_MINS,KC_UNDS,KC_BSPC, 
    //├───────┼───────┼───────┼───────┼───────┼───────┤                      ├───────┼───────┼───────┼───────┼───────┼───────┤
-      KC_LSFT, KC_1,   KC_2,   KC_3,   KC_4,   KC_0,                          KC_LEFT,KC_DOWN, KC_UP, KC_RIGHT,KC_PLUS,KC_MINS,
-   //├───────┼───────┼───────┼───────┼───────┼───────┼───────┐      ┌───────┼───────┼───────┼───────┼───────┼───────┼───────┤ 
-      KC_LCTL,KC_PERC,KC_PSCR,TM_SELECT,TM_NVER,TM_NHOR, KC_LGUI,      KC_DEL,TM_LEFT, TM_RIGHT,KC_EXLM,KC_EQL,KC_QUES,KC_DQT, 
+      KC_LSFT, KC_UP, KC_DOWN, KC_3,  TM_UP,TM_DOWN,                         KC_4,   KC_5,    KC_6,  KC_0,   KC_PPLS,KC_PMNS,
+   //├───────┼───────┼───────┼───────┼───────┼───────┼───────┐      ┌───────┼───────┼───────┼───────┼───────┼───────┼───────┤
+      KC_LCTL,KC_LEFT,KC_RIGHT,TM_SELECT,TM_LEFT,TM_RIGHT,KC_LGUI,      KC_DEL,KC_7,  KC_8,    KC_9,  KC_PEQL, KC_PAST ,KC_PSLS, 
    //└───────┴───────┴───────┴───┬───┴───┬───┴───┬───┴───┬───┘      └───┬───┴───┬───┴───┬───┴───┬───┼───────┼───────┼───────┤
-                                  KC_ESC,TT_LOWR, KC_SPC,               KC_SPC, KC_LGUI,KC_RALT
+                                  KC_ESC,TT_LOWR, KC_SPC,               KC_SPC, KC_LGUI ,KC_RALT
     //                           └───────┴───────┴───────┘              └───────┴───────┴───────┘ 
   ),
 
@@ -50,53 +50,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //┌────────┬───────┬───────┬───────┬───────┬───────┐                      ┌───────┬───────┬───────┬───────┬───────┬───────┐
       KC_ESC,   KC_1,    KC_2,  KC_3,    KC_4,  KC_5 ,                          KC_6,  KC_7,    KC_8,  KC_9,   KC_0,    KC_PIPE,
    //├────────┼───────┼───────┼───────┼───────┼───────┤                      ├───────┼───────┼───────┼───────┼───────┼───────┤
-       KC_GRV, VI_QUIT,VI_SAVE,KC_LCBR,KC_RCBR,KC_QUOT,                       KC_CIRC,KC_DLR ,KC_LBRC,KC_RBRC,KC_PGUP,KC_PGDN, 
+       KC_GRV, VI_QUIT,VI_SAVE,KC_LCBR,KC_RCBR,KC_QUOT,                       KC_EXLM,KC_AT , KC_HASH,KC_UNDS,KC_PGUP,KC_PGDN, 
    //├────────┼───────┼───────┼───────┼───────┼───────┤                      ├───────┼───────┼───────┼───────┼───────┼───────┤
-      KC_LSFT, GIT_ADD,GIT_STS, KC_LPRN,KC_RPRN, KC_DQT,                     GIT_PUSH,KC_LPRN,KC_RPRN,KC_COLN,KC_EQL, KC_BSPC, 
+      KC_LSFT, KC_UP,  KC_DOWN, KC_LPRN,KC_RPRN, KC_DQT,                      KC_DLR, KC_PERC,KC_CIRC,KC_RPRN,KC_EQL, KC_BSPC, 
    //├────────┼───────┼───────┼───────┼───────┼───────┼───────┐      ┌───────┼───────┼───────┼───────┼───────┼───────┼───────┤ 
-      KC_LCTL, GIT_CM ,GIT_DIF,KC_LBRC,KC_RBRC,VI_PREV,KC_LGUI,        KC_DEL,KC_LEFT,KC_RIGHT,VI_HOME,VI_END, KC_SLSH,RESET, 
+      KC_LCTL, KC_LEFT,KC_RIGHT,KC_LBRC,KC_RBRC,VI_PREV,KC_LGUI,        KC_DEL,KC_AMPR,KC_ASTR,KC_LPRN,KC_DEL, KC_QUES,RESET, 
    //└────────┴───────┴───────┴───┬───┴───┬───┴───┬───┴───┬───┘      └───┬───┴───┬───┴───┬───┴───┬───┼───────┼───────┼───────┤
-                                   KC_ESC,KC_LGUI, KC_SPC,               KC_ENT, TT_RAIS ,KC_RALT
+                                   KC_ESC,TT_LOWR, KC_SPC,               KC_ENT, TT_RAIS ,KC_RALT
     //                            └───────┴───────┴───────┘              └───────┴───────┴───────┘ 
-  ),
-
-  [_FUNCT] = LAYOUT(
-   //┌────────┬───────┬───────┬───────┬───────┬───────┐                      ┌───────┬───────┬───────┬───────┬───────┬───────┐
-      KC_F1,   KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6 ,                        KC_F7,  KC_F8,  KC_F9,  KC_F10, KC_F11, KC_F12,
-   //┌───────┬───────┬───────┬───────┬───────┬───────┐                      ┌───────┬───────┬───────┬───────┬───────┬───────┐
-      KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6,                         KC_F7,  KC_F8,  KC_F9,  KC_F10, KC_F11, KC_F12, 
-   //├───────┼───────┼───────┼───────┼───────┼───────┤                      ├───────┼───────┼───────┼───────┼───────┼───────┤
-      RGBEMOD,RGB_MOD,_______,RGB_VAD, RGB_VAI,_______,                       KC_LEFT,KC_DOWN, KC_UP, KC_RGHT,_______,_______,    
-   //├───────┼───────┼───────┼───────┼───────┼───────┼───────┐      ┌───────┼───────┼───────┼───────┼───────┼───────┼───────┤ 
-      RGBETOG, RGB_HUD, RGB_HUI, RGB_SAD, RGB_SAI,_______,TG_LOWR,       TG_RAIS,_______,_______,_______,_______,_______, RESET, 
-   //└───────┴───────┴───────┴───┬───┴───┬───┴───┬───┴───┬───┘      └───┬───┴───┬───┴───┬───┴───┬───┼───────┼───────┼───────┤
-                                  KC_LGUI,TT_LOWR, KC_SPC,               KC_ENT, TT_RAIS ,KC_RCTRL
-    //                           └───────┴───────┴───────┘              └───────┴───────┴───────┘ 
-  ),
-
-//   ┌─────┬─────┬─────┬─────┬─────┬─────┐                  ┌─────┬─────┬─────┬─────┬─────┬─────┐
-//   TAB     Q     W     E     R     T                        Y     U     I     O     P       
-//   ├─────┼─────┼─────┼─────┼─────┼─────┤                  ├─────┼─────┼─────┼─────┼─────┼─────┤ 
-//    ⎋ ^     A     S     D     F     G                        H     J     K     L   SCLN   QUOT 
-//   ├─────┼─────┼─────┼─────┼─────┼─────┼─────┐      ┌─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-//      ⇧     Z     X     C     V     B    LOW          RAIS   N     M     ,     .     /     ⇧ 
-//   └─────┴─────┴─────┴──┬──┴──┬──┴──┬──┴──┬──┘      └──┬──┴──┬──┴──┬──┴──┬──┴─────┴─────┴─────┘
-//                         LGUI  LOWER  ENT                SPC  RAISE  RALT
-//                        └─────┴─────┴─────┘            └─────┴─────┴─────┘ 
-  [_CONFIG] = LAYOUT(
-   //┌────────┬───────┬───────┬───────┬───────┬───────┐                      ┌───────┬───────┬───────┬───────┬───────┬───────┐
-      KC_F1,   KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6 ,                        KC_F7,  KC_F8,  KC_F9,  KC_F10, KC_F11, KC_F12,
-   //┌───────┬───────┬───────┬───────┬───────┬───────┐                      ┌───────┬───────┬───────┬───────┬───────┬───────┐
-      KC_TAB, KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                          KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,   KC_BSLS, 
-   //├───────┼───────┼───────┼───────┼───────┼───────┤                      ├───────┼───────┼───────┼───────┼───────┼───────┤
-      KC_LCTL, KC_A,  KC_S,   KC_D,   KC_F,   KC_G,                          KC_H,   KC_J,   KC_K,   KC_L,   KC_SCLN, KC_BSPC,
-   //├───────┼───────┼───────┼───────┼───────┼───────┼───────┐      ┌───────┼───────┼───────┼───────┼───────┼───────┼───────┤ 
-      KC_LCTL, KC_Z,   KC_X,    KC_C,   KC_V,   KC_B, TG_LOWR,       TG_RAIS, KC_N,  KC_M,   KC_COMM,KC_DOT, KC_SLSH, RESET, 
-   //└───────┴───────┴───────┴───┬───┴───┬───┴───┬───┴───┬───┘      └───┬───┴───┬───┴───┬───┴───┬───┼───────┼───────┼───────┤
-                                  KC_LGUI,TT_LOWR, KC_SPC,               KC_ENT, TT_RAIS ,KC_RCTRL
-    //                           └───────┴───────┴───────┘              └───────┴───────┴───────┘ 
-  ),
+  )
 };
+
 
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -192,6 +156,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           SEND_STRING("`"SS_TAP(X_RIGHT));
       }
       break;
+    case TM_UP:
+      if (record->event.pressed) {
+          SEND_STRING("`"SS_TAP(X_UP));
+      }
+      break;
+    case TM_DOWN:
+      if (record->event.pressed) {
+          SEND_STRING("`"SS_TAP(X_DOWN));
+      }
+      break;
     case TM_HOME:
       if (record->event.pressed) {
           SEND_STRING(SS_TAP(X_ESC)"^i");
@@ -264,9 +238,9 @@ void encoder_update_user(uint8_t index, bool clockwise) {
           }
         } else if (index == 1) {
           if (clockwise) {
-              tap_code(KC_PGDN);
-          } else {
               tap_code(KC_PGUP);
+          } else {
+              tap_code(KC_PGDN);
           }
       }
    }

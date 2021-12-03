@@ -35,6 +35,8 @@ enum custom_keycodes {
   TM_NHOR,
   TM_LEFT,
   TM_RIGHT,
+  TM_UP,
+  TM_DOWN,
   TM_SELECT,
   TM_HOME,
   TM_END
