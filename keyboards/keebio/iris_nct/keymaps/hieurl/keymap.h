@@ -31,6 +31,8 @@ enum custom_keycodes {
   VI_HOME,
   VI_END,
 
+  TM_NEW,
+  TM_CLOSE,
   TM_NVER,
   TM_NHOR,
   TM_LEFT,
