@@ -12,9 +12,7 @@ enum custom_keycodes {
   ON_QWERTY = SAFE_RANGE,
  
   ON_LOWER,
-  ON_RAISE,
-  ON_FUNCT,
-  ON_CONFIG,
+  ON_RAISE, ON_FUNCT,
 
   RGBETOG,
   RGBEMOD,
@@ -49,6 +47,10 @@ enum custom_keycodes {
 
 #define TT_LOWR TT(_LOWER)
 #define TT_RAIS TT(_RAISE)
+#define TT_FUNCT TT(_FUNCT)
 
 #define TG_LOWR TG(_LOWER)
 #define TG_RAIS TG(_RAISE)
+#define TG_FUNCT TG(_FUNCT)
+
+#define TD_CTRL TD(T_CTRL)

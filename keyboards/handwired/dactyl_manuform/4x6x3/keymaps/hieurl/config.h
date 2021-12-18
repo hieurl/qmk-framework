@@ -19,20 +19,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 //#define USE_SERIAL
-#define MASTER_LEFT
 //#define USE_I2C
-//#define EE_HANDS
+//#define SPLIT_HAND_PIN D2
+//#define MASTER_LEFT
+//#define USE_I2C
 #define TAPPING_TERM 175
 #define PERMISSIVE_HOLD
 
 #undef RGBLED_NUM
 #define RGBLIGHT_ANIMATIONS
 #define RGBLIGHT_SPLIT
-#define RGBLED_NUM 16    // Number of LEDs
-#define RGBLED_SPLIT { 8, 8 }
+#define RGBLED_NUM 32    // Number of LEDs
+#define RGBLED_SPLIT { 16, 16 }
 
 #define RGBLIGHT_HUE_STEP 8
 #define RGBLIGHT_SAT_STEP 8
 #define RGBLIGHT_VAL_STEP 8
-#define ENCODER_DIRECTION_FLIP
-// #define ENCODER_RESOLUTION 2
+#define RGBLIGHT_LIMIT_VAL 180
+//#define ENCODER_DIRECTION_FLI// #define ENCODER_RESOLUTION 2

@@ -28,6 +28,7 @@ enum custom_keycodes {
   VI_PREV,
   VI_HOME,
   VI_END,
+  VI_REPL,
 
   TM_NEW,
   TM_CLOSE,
@@ -46,7 +47,7 @@ enum custom_keycodes {
 #define MO_RAIS MO(_RAISE)
 
 #define TT_LOWR TT(_LOWER)
-#define TT_RAIS TT(_RAISE)
+#define TT_RAISE TT(_RAISE)
 #define TT_FUNCT TT(_FUNCT)
 
 #define TG_LOWR TG(_LOWER)
@@ -54,3 +55,5 @@ enum custom_keycodes {
 #define TG_FUNCT TG(_FUNCT)
 
 #define TD_CTRL TD(T_CTRL)
+#define TD_ALT TD(T_ALT)
+#define TD_ENT TD(T_ENT)

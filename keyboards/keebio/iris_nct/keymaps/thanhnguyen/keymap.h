@@ -29,3 +29,4 @@ enum custom_keycodes {
 #define TG_LOWR TG(_LOWER)
 #define TG_RAIS TG(_RAISE)
 #define TD_CTRL TD(T_CTRL)
+#define TD_ALT TD(T_ALT)

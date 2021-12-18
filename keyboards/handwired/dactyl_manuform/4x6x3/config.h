@@ -22,9 +22,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 #define PRODUCT         Dactyl-Manuform (4x6x3)
-#define USE_SERIAL
-//#define USE_I2C
+//#define USE_SERIAL
+#define USE_I2C
+//#define MASTER_LEFT
 //#define SPLIT_HAND_PIN D2
+//#define SPLIT_USB_DETECT
+#define EE_HANDS
 //#define SOFT_SERIAL_PIN D0
 
 /* key matrix size */
@@ -38,7 +41,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // WS2812 RGB LED strip input and number of LEDs
 #define RGB_DI_PIN D3
-#define RGBLED_NUM 12
+#define RGBLED_NUM 16
 
 /* define if matrix has ghost */
 //#define MATRIX_HAS_GHOST

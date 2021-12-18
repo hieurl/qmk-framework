@@ -3,22 +3,22 @@
 void handle_layer_changes(layer_state_t state) {
   switch (get_highest_layer(state)) {
     case _QWERTY:
-      rgblight_sethsv_noeeprom(HSV_BLUE);
+      rgblight_sethsv_noeeprom(HSV_PURPLE);
       rgblight_mode_noeeprom(RGBLIGHT_MODE_RAINBOW_SWIRL+4);
       break;
     
     case _LOWER:
       rgblight_mode_noeeprom(RGBLIGHT_MODE_BREATHING+2);
-      rgblight_sethsv_noeeprom(HSV_RED);
+      rgblight_sethsv_noeeprom(HSV_BLUE);
       break;
     
     case _RAISE:
       rgblight_mode_noeeprom(RGBLIGHT_MODE_BREATHING+2);
-      rgblight_sethsv_noeeprom(HSV_GREEN);
+      rgblight_sethsv_noeeprom(HSV_ORANGE);
       break;
 
     case _FUNCT:
-      rgblight_sethsv_noeeprom(HSV_BLUE);
+      rgblight_sethsv_noeeprom(HSV_RED);
       rgblight_mode_noeeprom(RGBLIGHT_MODE_CHRISTMAS);
       break;
     
