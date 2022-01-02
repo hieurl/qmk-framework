@@ -1,6 +1,5 @@
 /*
-Copyright 2012 Jun Wako <wakojun@gmail.com>
-Copyright 2015 Jack Humbert
+Copyright 2020 Thanh Nguyen <thanhnguyen12@gmail.com>>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -18,33 +17,28 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include "config_common.h"
-
-
-#define PRODUCT         Dactyl-Manuform (4x6x3)
 //#define USE_SERIAL
 #define USE_I2C
-//#define MASTER_LEFT
-//#define SPLIT_HAND_PIN D2
-//#define SPLIT_USB_DETECT
-#define EE_HANDS
+//#define MASTER_RIGHT
 
-/* key matrix size */
-// Rows are doubled-up
-#define MATRIX_ROWS 8
-#define MATRIX_COLS 6
+#define TAPPING_TERM 175
+#define PERMISSIVE_HOLD
 
-// wiring of each half
-#define MATRIX_COL_PINS { D4, C6, D7, E6, B4, B5 }
-#define MATRIX_ROW_PINS { F6, F7, B1, B3 }
+#define RGBLIGHT_ANIMATIONS
+#define RGBLIGHT_SPLIT
+#undef RGBLED_NUM
+#define RGBLED_NUM 6    // Number of LEDs
+#define RGBLED_SPLIT { 3,3 }
 
-// WS2812 RGB LED strip input and number of LEDs
-#define RGB_DI_PIN D3
-#define RGBLED_NUM 16
+#define RGBLIGHT_HUE_STEP 8
+#define RGBLIGHT_SAT_STEP 8
+#define RGBLIGHT_VAL_STEP 8
+//#define RGBLIGHT_LIMIT_VAL 250
+//#define ENABLE_RGB_MATRIX_SOLID_REACTIVE_MULTIWIDE
+//#define DRIVER_LED_TOTAL 36 
+//#define RGB_MATRIX_KEYPRESSES
 
-
-/* define if matrix has ghost */
-//#define MATRIX_HAS_GHOST
-
-/* number of backlight levels */
-// #define BACKLIGHT_LEVELS 3
+//#define ENCODER_DIRECTION_FLI// #define ENCODER_RESOLUTION 2
+#define LEADER_NO_TIMEOUT
+#define LEADER_PER_KEY_TIMING
+#define LEADER_TIMEOUT 500

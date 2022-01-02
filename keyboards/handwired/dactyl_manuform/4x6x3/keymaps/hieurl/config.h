@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define USE_SERIAL
 //#define USE_I2C
 //#define SPLIT_HAND_PIN D2
-//#define MASTER_LEFT
+//#define MASTER_RIGHT
 //#define USE_I2C
 #define TAPPING_TERM 175
 #define PERMISSIVE_HOLD
@@ -29,11 +29,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #undef RGBLED_NUM
 #define RGBLIGHT_ANIMATIONS
 #define RGBLIGHT_SPLIT
-#define RGBLED_NUM 32    // Number of LEDs
-#define RGBLED_SPLIT { 16, 16 }
+#define RGBLED_NUM 42    // Number of LEDs
+#define RGBLED_SPLIT { 21,21 }
 
 #define RGBLIGHT_HUE_STEP 8
 #define RGBLIGHT_SAT_STEP 8
 #define RGBLIGHT_VAL_STEP 8
-#define RGBLIGHT_LIMIT_VAL 180
+#define RGBLIGHT_LIMIT_VAL 220
+//#define ENABLE_RGB_MATRIX_SOLID_REACTIVE_MULTIWIDE
+//#define DRIVER_LED_TOTAL 36 
+//#define RGB_MATRIX_KEYPRESSES
+
 //#define ENCODER_DIRECTION_FLI// #define ENCODER_RESOLUTION 2
+#define LEADER_NO_TIMEOUT
+#define LEADER_PER_KEY_TIMING
+#define LEADER_TIMEOUT 500

@@ -20,7 +20,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //├────────┼───────┼───────┼───────┼───────┼───────┼───────┐      ┌───────┼───────┼───────┼───────┼───────┼───────┼───────┤ 
       KC_LCTL,  KC_Z,    KC_X,  KC_C,   KC_V,   KC_B,                          KC_N,  KC_M, KC_COMM,KC_DOT, KC_SLSH,   KC_LEFT, 
    //└────────┴───────┴───────┴───┬───┴───┬───┴───┬───┴───┬───┘      └───┬───┴───┬───┴───┬───┴───┬───┼───────┼───────┼───────┤
-                                   TT_LOWR, KC_SPC,TD_LEAD,               TD_ALT, TD_ENT, TT_RAISE
+                                   TT_LOWR, KC_SPC,KC_LSFT,               TD_ALT, TD_ENT, TT_RAISE
     //                            └───────┴───────┴───────┘              └───────┴───────┴───────┘ 
     //
   ),
@@ -279,17 +279,14 @@ void matrix_scan_user(void) {
             // Anything you can do in a macro.
             SEND_STRING("QMK is awesome.");
         }
-        SEQ_TWO_KEYS(KC_G, KC_S) {
-            //SEND_STRING(SS_LCTL("a") SS_LCTL("c"));
-            SEND_STRING("git status .");
+        SEQ_TWO_KEYS(KC_C, KC_C) {
+            SEND_STRING(SS_LCTL("a") SS_LCTL("c"));
         }
-        SEQ_TWO_KEYS(KC_G, KC_C) {
-            //SEND_STRING(SS_LCTL("a") SS_LCTL("c"));
-            SEND_STRING("git commit");
-        }
-        SEQ_THREE_KEYS(KC_G, KC_D, KC_H) {
-            //SEND_STRING(SS_LCTL("a") SS_LCTL("c"));
-            SEND_STRING("git diff HEAD .");
+        SEQ_TWO_KEYS(KC_A, KC_S) {
+            register_code(KC_LGUI);
+            register_code(KC_S);
+            unregister_code(KC_S);
+            unregister_code(KC_LGUI);
         }
     }
 }

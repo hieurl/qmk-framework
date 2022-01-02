@@ -57,4 +57,3 @@ enum custom_keycodes {
 #define TD_CTRL TD(T_CTRL)
 #define TD_ALT TD(T_ALT)
 #define TD_ENT TD(T_ENT)
-#define TD_LEAD TD(T_LEAD)
