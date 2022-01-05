@@ -296,6 +296,10 @@ void matrix_scan_user(void) {
         SEQ_TWO_KEYS(KC_V, KC_P) {
             SEND_STRING("\"+p"SS_TAP(X_ENT));
         }
+        //vim terminal
+        SEQ_TWO_KEYS(KC_V, KC_T) {
+            SEND_STRING(SS_TAP(X_ESC)":terminal"SS_TAP(X_ENT));
+        }
         //vim search recently yanked local 
         SEQ_THREE_KEYS(KC_V, KC_S, KC_S) {
             SEND_STRING(SS_TAP(X_ESC)":s/"SS_DOWN(X_LCTRL) SS_TAP(X_R) SS_UP(X_LCTRL)"0/");
