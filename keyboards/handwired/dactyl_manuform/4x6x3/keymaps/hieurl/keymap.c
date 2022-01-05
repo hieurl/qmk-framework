@@ -52,11 +52,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   
   [_FUNCT] = LAYOUT_4x6x3(
    //├────────┼───────┼───────┼───────┼───────┼───────┤                      ├───────┼───────┼───────┼───────┼───────┼───────┤
-      KC_TAB,  KC_W,  KC_F10,  KC_F1, KC_F2,  KC_F3 ,                       KC_F1,  KC_NO, KC_MS_U, KC_NO, KC_F11, KC_BSPC,
+      KC_TAB,  KC_W,  KC_F10,  KC_F1, KC_F2,  KC_F3 ,                         KC_MUTE,KC_VOLD,KC_VOLU,KC_CAPS,KC_MPLY, KC_BSPC,
    //├────────┼───────┼───────┼───────┼───────┼───────┤                      ├───────┼───────┼───────┼───────┼───────┼───────┤
       KC_LSFT, KC_C,  KC_F11, KC_F4,   KC_F5, KC_F6,                         KC_MS_L,KC_MS_D,KC_MS_U,KC_MS_R,KC_LEFT, KC_RIGHT, 
    //├────────┼───────┼───────┼───────┼───────┼───────┼───────┐      ┌───────┼───────┼───────┼───────┼───────┼───────┼───────┤ 
-      ESCLCTL, KC_V,   KC_F12, KC_F7, KC_F8, KC_F9,                           KC_NO,KC_WH_U,KC_WH_D,KC_BTN2,  RGBEMOD,RESET, 
+      ESCLCTL, KC_V,   KC_F12, KC_F7, KC_F8, KC_F9,                           KC_MPRV,KC_WH_U,KC_WH_D,KC_MNXT, RGBEMOD,RESET, 
    //└────────┴───────┴───────┴───┬───┴───┬───┴───┬───┴───┬───┘      └───┬───┴───┬───┴───┬───┴───┬───┼───────┼───────┼───────┤
                                    TG_FUNCT, KC_ENT,KC_ESC,               KC_RALT, KC_BTN1 , KC_BTN2
     //                            └───────┴───────┴───────┘              └───────┴───────┴───────┘ 
@@ -156,7 +156,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case TM_SELECT:
       if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_ESC)"`[k");
+          SEND_STRING("`[k");
       }
       break;
     case TM_LEFT:
@@ -275,10 +275,34 @@ void matrix_scan_user(void) {
         leading = false;
         leader_end();
 
-        SEQ_ONE_KEY(KC_F) {
-            // Anything you can do in a macro.
-            SEND_STRING("QMK is awesome.");
+        //nerd tree
+        SEQ_TWO_KEYS(KC_V, KC_N) {
+            SEND_STRING(SS_TAP(X_ESC)":NERDTreeToggle");
         }
+        //vim replaced recently yanked
+        SEQ_TWO_KEYS(KC_V, KC_R) {
+            SEND_STRING("y"SS_TAP(X_ESC)":%s/"SS_DOWN(X_LCTRL) SS_TAP(X_R) SS_UP(X_LCTRL)"0/");
+        }
+        //vim search recently yanked global
+        SEQ_TWO_KEYS(KC_V, KC_S) {
+            SEND_STRING("y"SS_TAP(X_ESC)"/"SS_DOWN(X_LCTRL) SS_TAP(X_R) SS_UP(X_LCTRL)"0/");
+        }
+        //vim yank to system clipboard
+        SEQ_TWO_KEYS(KC_V, KC_Y) {
+            SEND_STRING("\"+y"SS_TAP(X_ENT));
+        }
+
+        //vim paste from system clipboard
+        SEQ_TWO_KEYS(KC_V, KC_P) {
+            SEND_STRING("\"+p"SS_TAP(X_ENT));
+        }
+        //vim search recently yanked local 
+        SEQ_THREE_KEYS(KC_V, KC_S, KC_S) {
+            SEND_STRING(SS_TAP(X_ESC)":s/"SS_DOWN(X_LCTRL) SS_TAP(X_R) SS_UP(X_LCTRL)"0/");
+        }
+
+
+        //git
         SEQ_TWO_KEYS(KC_G, KC_S) {
             //SEND_STRING(SS_LCTL("a") SS_LCTL("c"));
             SEND_STRING("git status .");
