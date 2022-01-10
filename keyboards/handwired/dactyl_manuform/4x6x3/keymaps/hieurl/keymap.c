@@ -43,7 +43,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //├────────┼───────┼───────┼───────┼───────┼───────┤                      ├───────┼───────┼───────┼───────┼───────┼───────┤
       KC_END, KC_UP,  KC_DOWN, KC_LPRN,KC_RPRN, KC_DQT,                      KC_DLR, KC_PERC,KC_CIRC,KC_RPRN,KC_LEFT, KC_RIGHT, 
    //├────────┼───────┼───────┼───────┼───────┼───────┼───────┐      ┌───────┼───────┼───────┼───────┼───────┼───────┼───────┤ 
-      ESCLCTL, KC_LEFT,KC_RIGHT,KC_LBRC,KC_RBRC,VI_PREV,                      KC_AMPR,KC_ASTR,KC_LPRN,KC_EQL, KC_QUES,GIT_STS, 
+      ESCLCTL, KC_LEFT,KC_RIGHT,KC_LBRC,KC_RBRC,VI_PREV,                      KC_AMPR,KC_ASTR,KC_LPRN,KC_EQL, KC_QUES,KC_NO, 
    //└────────┴───────┴───────┴───┬───┴───┬───┴───┬───┴───┬───┘      └───┬───┴───┬───┴───┬───┴───┬───┼───────┼───────┼───────┤
                                    TG_FUNCT, KC_SPC,KC_LEAD,              KC_RALT, KC_ENT, TT_RAISE
     //                            └───────┴───────┴───────┘              └───────┴───────┴───────┘ 
@@ -52,11 +52,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   
   [_FUNCT] = LAYOUT_4x6x3(
    //├────────┼───────┼───────┼───────┼───────┼───────┤                      ├───────┼───────┼───────┼───────┼───────┼───────┤
-      KC_TAB,  KC_W,  KC_F10,  KC_F1, KC_F2,  KC_F3 ,                         KC_MUTE,KC_VOLD,KC_VOLU,KC_CAPS,KC_MPLY, KC_BSPC,
+      KC_TAB,  KC_W,  KC_F10,  KC_F1, KC_F2,  KC_F3 ,                         KC_MUTE,KC_VOLD,KC_VOLU,KC_MPRV,KC_MPLY, KC_BSPC,
    //├────────┼───────┼───────┼───────┼───────┼───────┤                      ├───────┼───────┼───────┼───────┼───────┼───────┤
       KC_LSFT, KC_C,  KC_F11, KC_F4,   KC_F5, KC_F6,                         KC_MS_L,KC_MS_D,KC_MS_U,KC_MS_R,KC_LEFT, KC_RIGHT, 
    //├────────┼───────┼───────┼───────┼───────┼───────┼───────┐      ┌───────┼───────┼───────┼───────┼───────┼───────┼───────┤ 
-      ESCLCTL, KC_V,   KC_F12, KC_F7, KC_F8, KC_F9,                           KC_MPRV,KC_WH_U,KC_WH_D,KC_MNXT, RGBEMOD,RESET, 
+      ESCLCTL, KC_V,   KC_F12, KC_F7, KC_F8, KC_F9,                     MEDIA_MIC_MUTE,KC_WH_U,KC_WH_D,KC_MNXT, RGBEMOD,RESET, 
    //└────────┴───────┴───────┴───┬───┴───┬───┴───┬───┴───┬───┘      └───┬───┴───┬───┴───┬───┴───┬───┼───────┼───────┼───────┤
                                    TG_FUNCT, KC_ENT,KC_ESC,               KC_RALT, KC_BTN1 , KC_BTN2
     //                            └───────┴───────┴───────┘              └───────┴───────┴───────┘ 
@@ -118,32 +118,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           SEND_STRING(SS_TAP(X_ESC)":b#"SS_TAP(X_ENT));
       }
       break;
-    case VI_REPL:
-      if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_ESC)":%s/"SS_DOWN(X_LCTRL) SS_TAP(X_R) SS_UP(X_LCTRL)"0/");
-      }
-      break;
-//    case VI_HOME:
-//      if (record->event.pressed) {
-//          SEND_STRING(SS_TAP(X_ESC)"^i");
-//      }
-//      break;
-//    case VI_END:
-//      if (record->event.pressed) {
-//          SEND_STRING(SS_TAP(X_ESC)"$i"SS_TAP(X_RIGHT));
-//      }
-//      break;
-//
-    case TM_NEW:
-      if (record->event.pressed) {
-          SEND_STRING("`c");
-      }
-      break;
-    case TM_CLOSE:
-      if (record->event.pressed) {
-          SEND_STRING("`x");
-      }
-      break;
     case TM_NVER:
       if (record->event.pressed) {
           SEND_STRING("`|");
@@ -190,31 +164,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       break;
 
-    case GIT_STS:
+    case MEDIA_MIC_MUTE:
       if (record->event.pressed) {
-          SEND_STRING("git status ."SS_TAP(X_ENT));
+          SEND_STRING(SS_DOWN(X_LCTRL) SS_DOWN(X_LSFT) SS_DOWN(X_RALT) SS_TAP(X_M) SS_UP(X_LCTRL) SS_UP(X_LSFT) SS_UP(X_RALT));
       }
-      break;
-    case GIT_DIF:
-      if (record->event.pressed) {
-          SEND_STRING("git diff HEAD ."SS_TAP(X_ENT));
-      }
-      break;
-    case GIT_CM:
-      if (record->event.pressed) {
-          SEND_STRING("git commit"SS_TAP(X_ENT)"i");
-      }
-      break;
-    case GIT_ADD:
-      if (record->event.pressed) {
-          SEND_STRING("git add ."SS_TAP(X_ENT));
-      }
-      break;
-    case GIT_PUSH:
-      if (record->event.pressed) {
-          SEND_STRING("git push origin ");
-      }
-      break;
   }
 
   #ifdef RGBLIGHT_ENABLE
@@ -277,7 +230,7 @@ void matrix_scan_user(void) {
 
         //nerd tree
         SEQ_TWO_KEYS(KC_V, KC_N) {
-            SEND_STRING(SS_TAP(X_ESC)":NERDTreeToggle");
+            SEND_STRING(SS_TAP(X_ESC)":NERDTreeToggle"SS_TAP(X_ENT));
         }
         //vim replaced recently yanked
         SEQ_TWO_KEYS(KC_V, KC_R) {
@@ -299,10 +252,13 @@ void matrix_scan_user(void) {
         //vim terminal
         SEQ_TWO_KEYS(KC_V, KC_T) {
             SEND_STRING(SS_TAP(X_ESC)":terminal"SS_TAP(X_ENT));
+            _delay_ms(100);
+            SEND_STRING("i");
         }
-        //vim search recently yanked local 
-        SEQ_THREE_KEYS(KC_V, KC_S, KC_S) {
-            SEND_STRING(SS_TAP(X_ESC)":s/"SS_DOWN(X_LCTRL) SS_TAP(X_R) SS_UP(X_LCTRL)"0/");
+        //vim terminal close
+        SEQ_THREE_KEYS(KC_V, KC_T, KC_T) {
+            SEND_STRING(SS_DOWN(X_LCTRL) SS_TAP(X_BSLS) SS_TAP(X_N) SS_UP(X_LCTRL));
+            SEND_STRING(SS_TAP(X_ESC)":b#"SS_TAP(X_ENT));
         }
 
 

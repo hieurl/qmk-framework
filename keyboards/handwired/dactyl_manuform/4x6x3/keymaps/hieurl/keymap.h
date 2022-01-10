@@ -12,26 +12,18 @@ enum custom_keycodes {
   ON_QWERTY = SAFE_RANGE,
  
   ON_LOWER,
-  ON_RAISE, ON_FUNCT,
+  ON_RAISE, 
+  ON_FUNCT,
 
   RGBETOG,
   RGBEMOD,
-
-  GIT_STS,
-  GIT_DIF,
-  GIT_CM,
-  GIT_ADD,
-  GIT_PUSH,
 
   VI_SAVE,
   VI_QUIT,
   VI_PREV,
   VI_HOME,
   VI_END,
-  VI_REPL,
 
-  TM_NEW,
-  TM_CLOSE,
   TM_NVER,
   TM_NHOR,
   TM_LEFT,
@@ -40,7 +32,9 @@ enum custom_keycodes {
   TM_DOWN,
   TM_SELECT,
   TM_HOME,
-  TM_END
+  TM_END,
+
+  MEDIA_MIC_MUTE
 };
 
 #define MO_LOWR MO(_LOWER)
