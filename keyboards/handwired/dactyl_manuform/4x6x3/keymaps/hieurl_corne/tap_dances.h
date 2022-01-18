@@ -30,6 +30,8 @@ void t_alt_finished (qk_tap_dance_state_t *state, void *user_data);
 void t_alt_reset (qk_tap_dance_state_t *state, void *user_data);
 void t_ent_finished (qk_tap_dance_state_t *state, void *user_data);
 void t_ent_reset (qk_tap_dance_state_t *state, void *user_data);
+void t_lead_finished (qk_tap_dance_state_t *state, void *user_data);
+void t_lead_reset (qk_tap_dance_state_t *state, void *user_data);
 
 enum {
   T_ESCTAB = 0,
@@ -37,5 +39,6 @@ enum {
   T_CTRL = 2,
   T_SEMCOL = 3,
   T_ALT = 4,
-  T_ENT = 5
+  T_ENT = 5,
+  T_LEAD = 6
 };

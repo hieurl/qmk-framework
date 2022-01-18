@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define USE_I2C
 //#define MASTER_LEFT
 //#define SPLIT_HAND_PIN D2
-//#define SPLIT_USB_DETECT
+#define SPLIT_USB_DETECT
 #define EE_HANDS
 
 /* key matrix size */

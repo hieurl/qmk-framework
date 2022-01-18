@@ -7,7 +7,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [T_SHFCAP] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT,KC_CAPS),
   [T_ALT]     = ACTION_TAP_DANCE_FN_ADVANCED(NULL, t_alt_finished, t_alt_reset),
   [T_ENT]     = ACTION_TAP_DANCE_FN_ADVANCED(NULL, t_ent_finished, t_ent_reset),
-  [T_CTRL]     = ACTION_TAP_DANCE_FN_ADVANCED(NULL, t_ctrl_finished, t_ctrl_reset)
+  [T_CTRL]     = ACTION_TAP_DANCE_FN_ADVANCED(NULL, t_ctrl_finished, t_ctrl_reset),
+  [T_LEAD]     = ACTION_TAP_DANCE_FN_ADVANCED(NULL, t_lead_finished, t_lead_reset)
 };
 // T_CTRL
 
@@ -20,6 +21,10 @@ static tap t_alt_tap_state = {
   .state = 0
 };
 static tap t_ent_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+static tap t_lead_tap_state = {
   .is_press_action = true,
   .state = 0
 };
@@ -110,9 +115,10 @@ void t_ent_finished (qk_tap_dance_state_t *state, void *user_data) {
       tap_code16(KC_ENT);
       tap_code16(KC_ENT);
       break;
-    case DOUBLE_HOLD: break;
+    case DOUBLE_HOLD:
       tap_code16(KC_ENT);
       tap_code16(KC_ENT);
+      break;
     case TRIPLE_TAP:
       tap_code16(KC_ENT);
       tap_code16(KC_ENT);
@@ -133,4 +139,45 @@ void t_ent_reset (qk_tap_dance_state_t *state, void *user_data) {
       break;
   }
   t_ent_tap_state.state = 0;
+}
+
+void t_lead_finished (qk_tap_dance_state_t *state, void *user_data) {
+  t_lead_tap_state.state = cur_dance(state);
+  switch (t_lead_tap_state.state) {
+    case SINGLE_TAP: 
+      qk_leader_start();
+      break;
+    case SINGLE_HOLD: 
+      qk_leader_start();
+      break;
+    case DOUBLE_TAP: 
+      tap_code16(KC_LSFT);
+      tap_code16(KC_LSFT);
+      break;
+    case DOUBLE_HOLD:
+      tap_code16(KC_LSFT);
+      register_code(KC_LSFT);
+      break;
+    case TRIPLE_TAP:
+      tap_code16(KC_LSFT);
+      tap_code16(KC_LSFT);
+      tap_code16(KC_LSFT);
+      break;
+  }
+}
+
+void t_lead_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (t_lead_tap_state.state) {
+    case SINGLE_TAP: break;
+    case SINGLE_HOLD: 
+      break;
+    case DOUBLE_TAP:
+      break;
+    case DOUBLE_HOLD: 
+      unregister_code(KC_LSFT);
+      break;
+    case TRIPLE_TAP:
+      break;
+  }
+  t_lead_tap_state.state = 0;
 }
